@@ -12,6 +12,22 @@ class ComingSoonView extends GetView<ComingSoonController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 60,
+          automaticallyImplyLeading: false,
+          leadingWidth: 45,
+          centerTitle: true,
+          backgroundColor: Constants.pimaryColor,
+          title: Text(
+            "Coming Soon",
+            textScaleFactor: 1.0,
+            style: TextStyle(
+                letterSpacing: 0.1,
+                wordSpacing: 0.1,
+                color: Colors.white,
+                fontSize: 18),
+          ),
+        ),
       body:Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
