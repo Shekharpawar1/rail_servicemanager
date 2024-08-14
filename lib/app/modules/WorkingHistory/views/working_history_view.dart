@@ -7,7 +7,8 @@ import '../../../../utils/Constant.dart';
 import '../controllers/working_history_controller.dart';
 
 class WorkingHistoryView extends GetView<WorkingHistoryController> {
-  const WorkingHistoryView({Key? key}) : super(key: key);
+   WorkingHistoryView({Key? key}) : super(key: key);
+   WorkingHistoryController workingHistory=Get.put(WorkingHistoryController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,17 +26,18 @@ class WorkingHistoryView extends GetView<WorkingHistoryController> {
             fontWeight: FontWeight.w400,fontSize: 22
         ),),
       ),
-      body:Container(
+      body:Obx(()=>Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: Color(0xFFF2F2F2),
         margin: EdgeInsets.only(bottom: 20),
-        child: ListView.builder(
-          itemCount: 5,
+        child:workingHistory.isLoading.value?Center(child: CircularProgressIndicator()): ListView.builder(
+          itemCount: workingHistory.setsList.length,
           itemBuilder: (context, index) {
+            var setDetails=workingHistory.setsList.value[index];
             return  GestureDetector(
               onTap: () {
-                Get.toNamed(Routes.WORKING_SET);
+               workingHistory.getSetDetails(setDetails['id'], index);
               },
               child: Column(
                 children: [
@@ -49,7 +51,7 @@ class WorkingHistoryView extends GetView<WorkingHistoryController> {
                           child: Divider(color: Colors.grey.withOpacity(0.35),thickness: 1.1,)),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Text("19-01-2023",style: TextStyle(
+                        child: Text("${setDetails['add_date']}",style: TextStyle(
                             color: Constants.blackColor,
                             fontSize: 16,
                             height: 0.98
@@ -94,14 +96,14 @@ class WorkingHistoryView extends GetView<WorkingHistoryController> {
                               Column(
                                 children: [
                                   Text(
-                                    "SIGN ON: 14:15",textScaler: TextScaler.linear(1),style: TextStyle(
+                                    "SIGN ON: ${setDetails['sign_no']}",textScaler: TextScaler.linear(1),style: TextStyle(
                                       color: Constants.blackColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400
                                   ),
                                   ),
                                   Text(
-                                    "SIGN OFF: 19:43",textScaler: TextScaler.linear(1),style: TextStyle(
+                                    "SIGN OFF: ${setDetails['sign_off']}",textScaler: TextScaler.linear(1),style: TextStyle(
                                       color: Constants.blackColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400
@@ -120,7 +122,7 @@ class WorkingHistoryView extends GetView<WorkingHistoryController> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        "4",textScaler: TextScaler.linear(1),style: TextStyle(
+                                        "${setDetails['set_no']}",textScaler: TextScaler.linear(1),style: TextStyle(
                                           color: Constants.whiteColor,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600
@@ -140,14 +142,14 @@ class WorkingHistoryView extends GetView<WorkingHistoryController> {
                               Column(
                                 children: [
                                   Text(
-                                    "START STATION: CSMT",textScaler: TextScaler.linear(1),style: TextStyle(
+                                    "START STATION: ${setDetails['signon_station']}",textScaler: TextScaler.linear(1),style: TextStyle(
                                       color: Constants.blackColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400
                                   ),
                                   ),
                                   Text(
-                                    "END STATION: CSMT",textScaler: TextScaler.linear(1),style: TextStyle(
+                                    "END STATION: ${setDetails['signoff_station']}",textScaler: TextScaler.linear(1),style: TextStyle(
                                       color: Constants.blackColor,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400
@@ -171,21 +173,21 @@ class WorkingHistoryView extends GetView<WorkingHistoryController> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "18-01-2023",textScaler: TextScaler.linear(1),style: TextStyle(
+                                "${setDetails['add_date']}",textScaler: TextScaler.linear(1),style: TextStyle(
                                   color: Constants.whiteColor,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400
                               ),
                               ),
                               Text(
-                                "Duty HRS:07:45",textScaler: TextScaler.linear(1),style: TextStyle(
+                                "Duty HRS:${setDetails['duty_hr']}",textScaler: TextScaler.linear(1),style: TextStyle(
                                   color: Constants.whiteColor,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400
                               ),
                               ),
                               Text(
-                                "NDH:00",textScaler: TextScaler.linear(1),style: TextStyle(
+                                "NDH:${setDetails['ndh']}",textScaler: TextScaler.linear(1),style: TextStyle(
                                   color: Constants.whiteColor,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400
@@ -202,7 +204,7 @@ class WorkingHistoryView extends GetView<WorkingHistoryController> {
             );
           },
         ),
-      ),
+      )),
     );
   }
 }

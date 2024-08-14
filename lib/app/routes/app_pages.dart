@@ -1,5 +1,12 @@
 import 'package:get/get.dart';
+import 'package:serviceman/app/modules/Alert/views/alert_views.dart';
+import 'package:serviceman/app/modules/Audio/audioBinding.dart';
+import 'package:serviceman/app/modules/test/views/test_category.dart';
 
+import '../modules/Alert/bindings/alert_binding.dart';
+import '../modules/Audio/AudioPlayView.dart';
+import '../modules/Audio/AudioView.dart';
+import '../modules/Audio/audioPlayBinding.dart';
 import '../modules/Books/bindings/books_binding.dart';
 import '../modules/Books/views/books_view.dart';
 import '../modules/Calculators/bindings/calculators_binding.dart';
@@ -41,6 +48,8 @@ import '../modules/WorkingSet/bindings/working_set_binding.dart';
 import '../modules/WorkingSet/views/working_set_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/test/bindings/test_binding.dart';
+import '../modules/test/views/test_view.dart';
 
 part 'app_routes.dart';
 
@@ -77,12 +86,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ROASTER,
-      page: () => const RoasterView(),
+      page: () =>  RoasterView(),
       binding: RoasterBinding(),
     ),
     GetPage(
       name: _Paths.WORKING_HISTORY,
-      page: () => const WorkingHistoryView(),
+      page: () =>  WorkingHistoryView(),
       binding: WorkingHistoryBinding(),
     ),
     GetPage(
@@ -132,12 +141,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.S_E_T_OFFLINE,
-      page: () => const SETOfflineView(),
+      page: () =>  SETOfflineView(),
       binding: SETOfflineBinding(),
     ),
     GetPage(
       name: _Paths.FIND_ROASTER_SET,
-      page: () => const FindRoasterSetView(),
+      page: () =>  FindRoasterSetView(),
       binding: FindRoasterSetBinding(),
     ),
     GetPage(
@@ -147,8 +156,24 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.VIDEOS,
-      page: () => const VideosView(),
+      page: () =>  VideosView(),
       binding: VideosBinding(),
+    ), GetPage(
+      name: _Paths.AUDIO,
+      page: () =>  AudioView(),
+      binding: Audiobinding(),
+    ), GetPage(
+      name: _Paths.AUDIOPLAY,
+      page: () =>  AudioPlayView(),
+      binding: AudioPlaybinding(),
+    ),GetPage(
+      name: _Paths.TEST,
+      page: () => TestCategory(),
+      binding: TestBinding(),
+    ),GetPage(
+      name: _Paths.Alert,
+      page: () => NotificationScreen(),
+      binding: Alertbinding(),
     ),
   ];
 }

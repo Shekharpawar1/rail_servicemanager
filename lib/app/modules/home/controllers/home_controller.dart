@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,7 +7,7 @@ import 'package:serviceman/utils/Constant.dart';
 import 'package:serviceman/utils/images.dart';
 
 import '../../../routes/app_pages.dart';
-import '../../Contacts/views/offlinecontact.dart';
+import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
@@ -23,10 +25,10 @@ class HomeController extends GetxController {
 
   final List servies=[].obs;
    final List<Services>ItemList=[
-     Services(img: Icon(Icons.receipt,color: Constants.pimaryColor,size: 40,), title: "Duty\nRecords"),
+     Services(img: Icon(Icons.phone,color: Constants.pimaryColor,size: 40,), title: "Contacts"),
      Services(img: Icon(Icons.train_sharp,color: Constants.pimaryColor,size: 40,), title: "Roster"),
      Services(img: Icon(Icons.history,color: Constants.pimaryColor,size: 40,), title: "Work\nHistory"),
-     Services(img: Icon(Icons.phone,color: Constants.pimaryColor,size: 40,), title: "Important\nContacts"),
+     Services(img: Icon(Icons.receipt,color: Constants.pimaryColor,size: 40,), title: "Duty\nRecords"),
    ];
   final List servies2=[].obs;
   final List<Services2>ItemList2=[
@@ -35,11 +37,11 @@ class HomeController extends GetxController {
 
   ];
 
-  final List<String>banner=[
-  ProjectImage.train2,
-    ProjectImage.train3,
-    ProjectImage.train4,
-  ];
+  // final List<String>banner=[
+  // ProjectImage.train2,
+  //   ProjectImage.train3,
+  //   ProjectImage.train4,
+  // ];
 
 
   showModal(context){
@@ -110,9 +112,46 @@ class HomeController extends GetxController {
     ProjectImage.trainN2,
     ProjectImage.trainN3,
   ];
+RxList banner=[].obs;
+RxBool isLoading=false.obs;
+  RxList news=[].obs;
+  Future<void> getBanners() async {
+    isLoading.value = true;
+    try {
+      final response = await http.get(Uri.parse('${Constants.Base_URL}banner'));
+      print("Divy=================================>${response.statusCode }");
+      if (response.statusCode == 200) {
+        print("Divy=================================>${response.statusCode }");
+        var data = json.decode(response.body);
+        print("bannne===========${data['data']}");
+        banner.value.addAll(data['data'].where((item) => item['type'] == 'banner').toList());
+        news.value.addAll(data['data'].where((item) => item['type'] == 'news').toList());
+        // news.value.addAll(RxList<String>.from(data['data'].where((item) => item['type'] == 'news').map((item) => item['file'])));
+        // isLoading.value = false;
+        print("bannne===========${banner.value}");
+
+        print("news===========${news.value}");
+        update();
+      } else {
+        print('Failed to load banners');
+      }
+    } catch (e) {
+      print('Error in all table $e');
+    }finally{
+      isLoading.value=false;
+    }
+  }
+
+
+
+
   @override
   void onInit() {
+
+    getBanners();
+    print("bannner===========${banner.value.length}");
     super.onInit();
+
   }
 
   @override
@@ -133,13 +172,17 @@ class HomeController extends GetxController {
     MenuList(img:Icon(Icons.person,color: Constants.pimaryColor,size: 40,),title: "Edit Profile",onTap:(){  Get.back(); Get.toNamed(Routes.EDIT_PROFILE);}),
     MenuList(img:Icon(Icons.offline_pin,color: Constants.pimaryColor,size: 40,),title: "WTT",onTap:(){ Get.back(); Get.toNamed(Routes.OFFLINE_W_T_T);}),
     MenuList(img:Icon(Icons.offline_pin,color: Constants.pimaryColor,size: 40,),title: "SET",onTap:(){Get.back(); Get.toNamed(Routes.S_E_T_OFFLINE);}),
-    MenuList(img:Icon(Icons.offline_pin,color: Constants.pimaryColor,size: 40,),title: "Contact",onTap:(){ Get.back(); Get.to(OfflineContact());}),
+    MenuList(img:Icon(Icons.offline_pin,color: Constants.pimaryColor,size: 40,),title: "Contact",onTap:(){ Get.back(); Get.toNamed(Routes.CONTACTS);}),
+    MenuList(img: Icon(  Icons.calculate,color: Constants.pimaryColor,size: 40,), title: "Calculator", onTap: () { Get.back(); Get.toNamed(Routes.CALCULATORS); }),
     MenuList(img: Icon(Icons.accessible,color: Constants.pimaryColor,size: 40,), title: "Rules &\nUpdates", onTap: () { Get.back();  Get.toNamed(Routes.RULES_AND_UPDATES);}),
-    MenuList(img: Icon(Icons.file_copy,color: Constants.pimaryColor,size: 40,), title: "Forms", onTap: () {   Get.back();Get.toNamed(Routes.RULES_AND_UPDATES);}),
-    MenuList(img: Icon(Icons.book,color: Constants.pimaryColor,size: 40,), title: "Books", onTap: () { Get.back(); Get.toNamed(Routes.RULES_AND_UPDATES); }),
+    MenuList(img: Icon(Icons.file_copy,color: Constants.pimaryColor,size: 40,), title: "Forms", onTap: () {   Get.back();Get.toNamed(Routes.FORMS);}),
+    MenuList(img: Icon(Icons.book,color: Constants.pimaryColor,size: 40,), title: "Books", onTap: () { Get.back(); Get.toNamed(Routes.BOOKS); }),
     MenuList(img: Icon(Icons.info,color: Constants.pimaryColor,size: 40,), title: "Service Profile", onTap: () { Get.back();  Get.toNamed(Routes.COMING_SOON); }),
     MenuList(img: Icon(  Icons.video_collection,color: Constants.pimaryColor,size: 40,), title: "Video", onTap: () {  Get.back();       Get.toNamed(Routes.VIDEOS); }),
-    MenuList(img: Icon(  Icons.circle_notifications,color: Constants.pimaryColor,size: 40,), title: "Alert", onTap: () {  Get.back(); Get.toNamed(Routes.COMING_SOON); }),
+    MenuList(img: Icon(  Icons.audio_file,color: Constants.pimaryColor,size: 40,), title: "Audio", onTap: () {  Get.back();       Get.toNamed(Routes.AUDIO); }),
+    MenuList(img: Icon(  Icons.circle_notifications,color: Constants.pimaryColor,size: 40,), title: "Alert", onTap: () { Get.back(); Get.toNamed(Routes.ALERT); }),
+    MenuList(img: Icon(  Icons.content_paste_go_outlined,color: Constants.pimaryColor,size: 40,), title: "Quiz", onTap: () { Get.back(); Get.toNamed(Routes.TEST); }),
+
   ];
 
 

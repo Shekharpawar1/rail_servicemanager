@@ -134,128 +134,128 @@ class ListOfofflineContact extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 25,),
-              Container(
-                child: ListView.builder(
-                  itemCount: 5,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (BuildContext context,int index) {
-                    return Column(
-                      children: [
-                        Obx(() => Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                          decoration:BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5),
-                              boxShadow: [
-                                BoxShadow(color:Colors.black38,
-                                    blurRadius: 4,
-                                    offset: Offset(2, 2))
-                              ]
-                          ),
-                          child: ExpansionTile(
-                            title:  Text('MAHALAXMI(MX)',style: TextStyle(
-                              color:listOfflineContactController.isExpanded.value?Colors.blue: Constants.blackColor,
-                            ),),
-                            trailing:listOfflineContactController.isExpanded.value? Icon(Icons.keyboard_arrow_up,size: 30,color: Colors.blue,):Icon(Icons.keyboard_arrow_down,size: 30,color: Colors.grey,),
-                            onExpansionChanged: (bool expanded) {
-                              listOfflineContactController.toggleExpanded();
-                            },
-                            shape: InputBorder.none,
-                            expandedAlignment: Alignment.topLeft,
-                            childrenPadding: EdgeInsets.symmetric(horizontal: 20),
-                            children: <Widget>[
-                              Text.rich(
-                                TextSpan(
-                                    children: [
-                                      TextSpan(
-                                          text: "RLY",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 15,
-                                              color: Colors.black
-                                          )
-                                      ),
-                                      TextSpan(
-                                          text: ":   ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 13,
-                                              color: Colors.black
-                                          )
-                                      ),
-                                      TextSpan(
-                                          text: "02222697310",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 13,
-                                              color: Colors.black
-                                          )
-                                      )
-                                    ]
-                                ),
-                              ),
-                              Text.rich(
-                                TextSpan(
-                                    children: [
-                                      WidgetSpan(child:
-                                      Icon(Icons.store_mall_directory,color: Colors.black,)
-                                      ),
-                                      TextSpan(
-                                          text: ":  ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 13,
-                                              color: Colors.black
-                                          )
-                                      ),
-                                      TextSpan(
-                                          text: "02222697309",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 13,
-                                              color: Colors.black
-                                          )
-                                      )
-                                    ]
-                                ),
-                              ),
-                              Text.rich(
-                                TextSpan(
-                                    children: [
-                                      WidgetSpan(child:
-                                      Icon(Icons.phone_enabled
-                                        ,color: Colors.black,)
-                                      ),
-                                      TextSpan(
-                                          text: ":",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 13,
-                                              color: Colors.black
-                                          )
-                                      ),
-                                      TextSpan(
-                                          text: "02222620086",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 13,
-                                              color: Colors.black
-                                          )
-                                      )
-                                    ]
-                                ),
-                              ),
-                              SizedBox(height: 15,),
-                            ],
-                          ),
-                        ),),
-                      ],
-                    );
-                  },
-                ),
-              )
+              // Container(
+              //   child: ListView.builder(
+              //     itemCount: 5,
+              //     shrinkWrap: true,
+              //     physics: NeverScrollableScrollPhysics(),
+              //     itemBuilder: (BuildContext context,int index) {
+              //       return Column(
+              //         children: [
+              //           Obx(() => Container(
+              //             width: double.infinity,
+              //             margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+              //             decoration:BoxDecoration(
+              //                 color: Colors.white,
+              //                 borderRadius: BorderRadius.circular(5),
+              //                 boxShadow: [
+              //                   BoxShadow(color:Colors.black38,
+              //                       blurRadius: 4,
+              //                       offset: Offset(2, 2))
+              //                 ]
+              //             ),
+              //             child: ExpansionTile(
+              //               title:  Text('MAHALAXMI(MX)',style: TextStyle(
+              //                 color:listOfflineContactController.isExpanded.value?Colors.blue: Constants.blackColor,
+              //               ),),
+              //               trailing:listOfflineContactController.isExpanded.value? Icon(Icons.keyboard_arrow_up,size: 30,color: Colors.blue,):Icon(Icons.keyboard_arrow_down,size: 30,color: Colors.grey,),
+              //               onExpansionChanged: (bool expanded) {
+              //                 listOfflineContactController.toggleExpanded();
+              //               },
+              //               shape: InputBorder.none,
+              //               expandedAlignment: Alignment.topLeft,
+              //               childrenPadding: EdgeInsets.symmetric(horizontal: 20),
+              //               children: <Widget>[
+              //                 Text.rich(
+              //                   TextSpan(
+              //                       children: [
+              //                         TextSpan(
+              //                             text: "RLY",
+              //                             style: TextStyle(
+              //                                 fontWeight: FontWeight.w700,
+              //                                 fontSize: 15,
+              //                                 color: Colors.black
+              //                             )
+              //                         ),
+              //                         TextSpan(
+              //                             text: ":   ",
+              //                             style: TextStyle(
+              //                                 fontWeight: FontWeight.w500,
+              //                                 fontSize: 13,
+              //                                 color: Colors.black
+              //                             )
+              //                         ),
+              //                         TextSpan(
+              //                             text: "02222697310",
+              //                             style: TextStyle(
+              //                                 fontWeight: FontWeight.w400,
+              //                                 fontSize: 13,
+              //                                 color: Colors.black
+              //                             )
+              //                         )
+              //                       ]
+              //                   ),
+              //                 ),
+              //                 Text.rich(
+              //                   TextSpan(
+              //                       children: [
+              //                         WidgetSpan(child:
+              //                         Icon(Icons.store_mall_directory,color: Colors.black,)
+              //                         ),
+              //                         TextSpan(
+              //                             text: ":  ",
+              //                             style: TextStyle(
+              //                                 fontWeight: FontWeight.w500,
+              //                                 fontSize: 13,
+              //                                 color: Colors.black
+              //                             )
+              //                         ),
+              //                         TextSpan(
+              //                             text: "02222697309",
+              //                             style: TextStyle(
+              //                                 fontWeight: FontWeight.w400,
+              //                                 fontSize: 13,
+              //                                 color: Colors.black
+              //                             )
+              //                         )
+              //                       ]
+              //                   ),
+              //                 ),
+              //                 Text.rich(
+              //                   TextSpan(
+              //                       children: [
+              //                         WidgetSpan(child:
+              //                         Icon(Icons.phone_enabled
+              //                           ,color: Colors.black,)
+              //                         ),
+              //                         TextSpan(
+              //                             text: ":",
+              //                             style: TextStyle(
+              //                                 fontWeight: FontWeight.w500,
+              //                                 fontSize: 13,
+              //                                 color: Colors.black
+              //                             )
+              //                         ),
+              //                         TextSpan(
+              //                             text: "02222620086",
+              //                             style: TextStyle(
+              //                                 fontWeight: FontWeight.w400,
+              //                                 fontSize: 13,
+              //                                 color: Colors.black
+              //                             )
+              //                         )
+              //                       ]
+              //                   ),
+              //                 ),
+              //                 SizedBox(height: 15,),
+              //               ],
+              //             ),
+              //           ),),
+              //         ],
+              //       );
+              //     },
+              //   ),
+              // )
             ],
           ),
         ),

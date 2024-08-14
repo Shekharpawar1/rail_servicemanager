@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "65579654892",
+    "project_id": "servicemanager-98b27",
+    "storage_bucket": "servicemanager-98b27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65579654892:android:ab82c703acd92127208fc9",
+        "android_client_info": {
+          "package_name": "com.techpanda.servicemanagers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIxwZd8dVWg7ocPQ7XxtIAKf1GdcHjpSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

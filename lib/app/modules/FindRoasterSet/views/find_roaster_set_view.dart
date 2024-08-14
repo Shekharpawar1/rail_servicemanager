@@ -7,9 +7,269 @@ import '../../../../utils/Constant.dart';
 import '../controllers/find_roaster_set_controller.dart';
 
 class FindRoasterSetView extends GetView<FindRoasterSetController> {
-  const FindRoasterSetView({Key? key}) : super(key: key);
-  @override
+  final argumentsData=Get.arguments as Map;
+   FindRoasterSetView({Key? key}) : super(key: key);
+   FindRoasterSetController findRosterController=FindRoasterSetController();
+
+   @override
   Widget build(BuildContext context) {
+    dynamic argumentDataList=argumentsData['filteredDataList'];
+    final argumentDataTrain=argumentsData['setData'];
+    List<Widget>ItemList=[
+      Container(
+        // width: 64,
+        padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(5),
+                bottomLeft: Radius.circular(5)),
+            color: Constants.whiteColor,
+            border: Border(
+                right: BorderSide(
+                  color: Colors.grey.shade400,
+                ))),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "SIGN ON",
+              textScaler: TextScaler.linear(1),style: TextStyle(
+              color: Constants.pimaryColor,
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+            ),
+            ),
+            Text(
+              "${argumentDataList[0]['sign_no']}",
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textScaler: TextScaler.linear(1),style: TextStyle(
+              color: Colors.grey,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+            ),
+            Text(
+              "${argumentDataList[0]['signon_station']}",
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textScaler: TextScaler.linear(1),style: TextStyle(
+              color: Colors.teal,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+            ),
+          ],
+        ),
+      ),
+      Container(
+        // width: 66,
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+          decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(5),
+              color: Constants.whiteColor,
+              border: Border(
+                  right: BorderSide(
+                    color: Colors.grey.shade400,
+                  ))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "SIGN OFF",
+                textScaler: TextScaler.linear(1),style: TextStyle(
+                color: Constants.pimaryColor,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+              ),
+              Text(
+                "${argumentDataList[0]['sign_off']}",
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                textScaler: TextScaler.linear(1),style: TextStyle(
+                color: Colors.grey,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+              ),
+              Text(
+                "${argumentDataList[0]['signoff_station']}",
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                textScaler: TextScaler.linear(1),style: TextStyle(
+                color: Colors.teal,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+              ),
+            ],
+          )),
+      Container(
+        // width: 72,
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+          decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(5),
+              color: Constants.whiteColor,
+              border: Border(
+                  right: BorderSide(
+                    color: Colors.grey.shade400,
+                  ))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "DUTY HRS",
+                textScaler: TextScaler.linear(1),style: TextStyle(
+                color: Constants.pimaryColor,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+              ),
+              Text(
+                "${argumentDataList[0]['duty_hr']}",
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                textScaler: TextScaler.linear(1),style: TextStyle(
+                color: Colors.grey,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+              ),
+              // Text("CSMT",
+              //   textScaler: TextScaler.linear(1),style: TextStyle(
+              //     color: Colors.teal,
+              //     fontSize: 13,
+              //     fontWeight: FontWeight.w600,
+              //   ),
+              // ),
+            ],
+          )),
+      Container(
+        // width: 42,
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+          decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(5),
+              color: Constants.whiteColor,
+              border: Border(
+                  right: BorderSide(
+                    color: Colors.grey.shade400,
+                  ))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "KMS",
+                textScaler: TextScaler.linear(1),style: TextStyle(
+                color: Constants.pimaryColor,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+              ),
+              Text(
+                "${argumentDataList[0]['kms']}",
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                textScaler: TextScaler.linear(1),style: TextStyle(
+                color: Colors.grey,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+              ),
+              // Text("CSMT",
+              //   textScaler: TextScaler.linear(1),style: TextStyle(
+              //     color: Colors.teal,
+              //     fontSize: 13,
+              //     fontWeight: FontWeight.w600,
+              //   ),
+              // ),
+            ],
+          )),
+      Container(
+        // width: 42,
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+          decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(5),
+              color: Constants.whiteColor,
+              border: Border(
+                  right: BorderSide(
+                    color: Colors.grey.shade400,
+                  ))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "NDH",
+
+                textScaler: TextScaler.linear(1),style: TextStyle(
+                color: Constants.pimaryColor,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+              ),
+              Text(
+                "${argumentDataList[0]['ndh']}",
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                textScaler: TextScaler.linear(1),style: TextStyle(
+                color: Colors.grey,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+              ),
+              // Text("CSMT",
+              //   textScaler: TextScaler.linear(1),style: TextStyle(
+              //     color: Colors.teal,
+              //     fontSize: 13,
+              //     fontWeight: FontWeight.w600,
+              //   ),
+              // ),
+            ],
+          )),
+      Container(
+        // width: 50,
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Constants.whiteColor,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "SHIFT",
+                textScaler: TextScaler.linear(1),style: TextStyle(
+                color: Constants.pimaryColor,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+              ),
+              Text("${argumentDataList[0]['duty_shift']}",
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                textScaler: TextScaler.linear(1),style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          )),
+    ];
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60,
@@ -26,7 +286,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
         centerTitle: true,
         backgroundColor: Constants.pimaryColor,
         title: Text(
-          "SET NO:5",
+          "SET NO:${argumentDataList[0]['set_no']}",
           textScaler: TextScaler.linear(1),
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -46,9 +306,9 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                 height: 10,
               ),
               Container(
-                height: 70,
+                height: 72,
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 12),
+                margin: EdgeInsets.symmetric(horizontal:4),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5),
@@ -58,231 +318,277 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                           blurRadius: 4,
                           offset: Offset(2, 2))
                     ]),
-                child: Row(children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(5),
-                            bottomLeft: Radius.circular(5)),
-                        color: Constants.whiteColor,
-                        border: Border(
-                            right: BorderSide(
-                              color: Colors.grey.shade400,
-                            ))),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "SIGN ON",
-                          textScaler: TextScaler.linear(1),style: TextStyle(
-                          color: Constants.pimaryColor,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        ),
-                        Text(
-                          "07:38",
-                          textScaler: TextScaler.linear(1),style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        ),
-                        Text(
-                          "CSMT",
-                          textScaler: TextScaler.linear(1),style: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-                      decoration: BoxDecoration(
-                        // borderRadius: BorderRadius.circular(5),
-                          color: Constants.whiteColor,
-                          border: Border(
-                              right: BorderSide(
-                                color: Colors.grey.shade400,
-                              ))),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "SIGN OFF",
-                            textScaler: TextScaler.linear(1),style: TextStyle(
-                            color: Constants.pimaryColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          Text(
-                            "14:38",
-                            textScaler: TextScaler.linear(1),style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          Text(
-                            "CSMT",
-                            textScaler: TextScaler.linear(1),style: TextStyle(
-                            color: Colors.teal,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                        ],
-                      )),
-                  Container(
-                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-                      decoration: BoxDecoration(
-                        // borderRadius: BorderRadius.circular(5),
-                          color: Constants.whiteColor,
-                          border: Border(
-                              right: BorderSide(
-                                color: Colors.grey.shade400,
-                              ))),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "DUTY HRS",
-                            textScaler: TextScaler.linear(1),style: TextStyle(
-                            color: Constants.pimaryColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          Text(
-                            "07:45",
-                            textScaler: TextScaler.linear(1),style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          // Text("CSMT",
-                          //   textScaler: TextScaler.linear(1),style: TextStyle(
-                          //     color: Colors.teal,
-                          //     fontSize: 13,
-                          //     fontWeight: FontWeight.w600,
-                          //   ),
-                          // ),
-                        ],
-                      )),
-                  Container(
-                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-                      decoration: BoxDecoration(
-                        // borderRadius: BorderRadius.circular(5),
-                          color: Constants.whiteColor,
-                          border: Border(
-                              right: BorderSide(
-                                color: Colors.grey.shade400,
-                              ))),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "KMS",
-                            textScaler: TextScaler.linear(1),style: TextStyle(
-                            color: Constants.pimaryColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          Text(
-                            "196",
-                            textScaler: TextScaler.linear(1),style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          // Text("CSMT",
-                          //   textScaler: TextScaler.linear(1),style: TextStyle(
-                          //     color: Colors.teal,
-                          //     fontSize: 13,
-                          //     fontWeight: FontWeight.w600,
-                          //   ),
-                          // ),
-                        ],
-                      )),
-                  Container(
-                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-                      decoration: BoxDecoration(
-                        // borderRadius: BorderRadius.circular(5),
-                          color: Constants.whiteColor,
-                          border: Border(
-                              right: BorderSide(
-                                color: Colors.grey.shade400,
-                              ))),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "NDH",
-                            textScaler: TextScaler.linear(1),style: TextStyle(
-                            color: Constants.pimaryColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          Text(
-                            "00:00",
-                            textScaler: TextScaler.linear(1),style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          // Text("CSMT",
-                          //   textScaler: TextScaler.linear(1),style: TextStyle(
-                          //     color: Colors.teal,
-                          //     fontSize: 13,
-                          //     fontWeight: FontWeight.w600,
-                          //   ),
-                          // ),
-                        ],
-                      )),
-                  Container(
-                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-                      decoration: BoxDecoration(
-                        // borderRadius: BorderRadius.circular(5),
-                        color: Constants.whiteColor,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "SHIFT",
-                            textScaler: TextScaler.linear(1),style: TextStyle(
-                            color: Constants.pimaryColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                        ],
-                      )),
-                ]),
+                child:ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: ItemList.length,
+                    itemBuilder: (context, index) {
+                      return ItemList[index];
+                    }
+                ),
+                // Row(children: [
+                //   Container(
+                //     // width: 64,
+                //     padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+                //     decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.only(
+                //             topLeft: Radius.circular(5),
+                //             bottomLeft: Radius.circular(5)),
+                //         color: Constants.whiteColor,
+                //         border: Border(
+                //             right: BorderSide(
+                //               color: Colors.grey.shade400,
+                //             ))),
+                //     child: Column(
+                //       mainAxisAlignment: MainAxisAlignment.start,
+                //       crossAxisAlignment: CrossAxisAlignment.start,
+                //       children: [
+                //         Text(
+                //           "SIGN ON",
+                //           textScaler: TextScaler.linear(1),style: TextStyle(
+                //           color: Constants.pimaryColor,
+                //           fontSize: 13,
+                //           fontWeight: FontWeight.w600,
+                //         ),
+                //         ),
+                //         Text(
+                //           "${argumentDataList[0]['sign_no']}",
+                //           softWrap: true,
+                //           overflow: TextOverflow.ellipsis,
+                //           maxLines: 1,
+                //           textScaler: TextScaler.linear(1),style: TextStyle(
+                //           color: Colors.grey,
+                //           fontSize: 14,
+                //           fontWeight: FontWeight.w600,
+                //         ),
+                //         ),
+                //         Text(
+                //           "${argumentDataList[0]['signon_station']}",
+                //           softWrap: true,
+                //           overflow: TextOverflow.ellipsis,
+                //           maxLines: 1,
+                //           textScaler: TextScaler.linear(1),style: TextStyle(
+                //           color: Colors.teal,
+                //           fontSize: 14,
+                //           fontWeight: FontWeight.w600,
+                //         ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                //   Container(
+                //     // width: 66,
+                //       padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+                //       decoration: BoxDecoration(
+                //         // borderRadius: BorderRadius.circular(5),
+                //           color: Constants.whiteColor,
+                //           border: Border(
+                //               right: BorderSide(
+                //                 color: Colors.grey.shade400,
+                //               ))),
+                //       child: Column(
+                //         mainAxisAlignment: MainAxisAlignment.start,
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           Text(
+                //             "SIGN OFF",
+                //             textScaler: TextScaler.linear(1),style: TextStyle(
+                //             color: Constants.pimaryColor,
+                //             fontSize: 13,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //           ),
+                //           Text(
+                //             "${argumentDataList[0]['sign_off']}",
+                //             softWrap: true,
+                //             overflow: TextOverflow.ellipsis,
+                //             maxLines: 1,
+                //             textScaler: TextScaler.linear(1),style: TextStyle(
+                //             color: Colors.grey,
+                //             fontSize: 14,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //           ),
+                //           Text(
+                //             "${argumentDataList[0]['signoff_station']}",
+                //             softWrap: true,
+                //             overflow: TextOverflow.ellipsis,
+                //             maxLines: 1,
+                //             textScaler: TextScaler.linear(1),style: TextStyle(
+                //             color: Colors.teal,
+                //             fontSize: 14,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //           ),
+                //         ],
+                //       )),
+                //   Container(
+                //     // width: 72,
+                //       padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+                //       decoration: BoxDecoration(
+                //         // borderRadius: BorderRadius.circular(5),
+                //           color: Constants.whiteColor,
+                //           border: Border(
+                //               right: BorderSide(
+                //                 color: Colors.grey.shade400,
+                //               ))),
+                //       child: Column(
+                //         mainAxisAlignment: MainAxisAlignment.start,
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           Text(
+                //             "DUTY HRS",
+                //             textScaler: TextScaler.linear(1),style: TextStyle(
+                //             color: Constants.pimaryColor,
+                //             fontSize: 13,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //           ),
+                //           Text(
+                //             "${argumentDataList[0]['duty_hr']}",
+                //             softWrap: true,
+                //             overflow: TextOverflow.ellipsis,
+                //             maxLines: 1,
+                //             textScaler: TextScaler.linear(1),style: TextStyle(
+                //             color: Colors.grey,
+                //             fontSize: 14,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //           ),
+                //           // Text("CSMT",
+                //           //   textScaler: TextScaler.linear(1),style: TextStyle(
+                //           //     color: Colors.teal,
+                //           //     fontSize: 13,
+                //           //     fontWeight: FontWeight.w600,
+                //           //   ),
+                //           // ),
+                //         ],
+                //       )),
+                //   Container(
+                //     // width: 42,
+                //       padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+                //       decoration: BoxDecoration(
+                //         // borderRadius: BorderRadius.circular(5),
+                //           color: Constants.whiteColor,
+                //           border: Border(
+                //               right: BorderSide(
+                //                 color: Colors.grey.shade400,
+                //               ))),
+                //       child: Column(
+                //         mainAxisAlignment: MainAxisAlignment.start,
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           Text(
+                //             "KMS",
+                //
+                //             textScaler: TextScaler.linear(1),style: TextStyle(
+                //             color: Constants.pimaryColor,
+                //             fontSize: 13,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //           ),
+                //           Text(
+                //             "${argumentDataList[0]['kms']}",
+                //             softWrap: true,
+                //             overflow: TextOverflow.ellipsis,
+                //             maxLines: 2,
+                //             textScaler: TextScaler.linear(1),style: TextStyle(
+                //             color: Colors.grey,
+                //             fontSize: 14,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //           ),
+                //           // Text("CSMT",
+                //           //   textScaler: TextScaler.linear(1),style: TextStyle(
+                //           //     color: Colors.teal,
+                //           //     fontSize: 13,
+                //           //     fontWeight: FontWeight.w600,
+                //           //   ),
+                //           // ),
+                //         ],
+                //       )),
+                //   Container(
+                //     // width: 42,
+                //       padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+                //       decoration: BoxDecoration(
+                //         // borderRadius: BorderRadius.circular(5),
+                //           color: Constants.whiteColor,
+                //           border: Border(
+                //               right: BorderSide(
+                //                 color: Colors.grey.shade400,
+                //               ))),
+                //       child: Column(
+                //         mainAxisAlignment: MainAxisAlignment.start,
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           Text(
+                //             "NDH",
+                //
+                //             textScaler: TextScaler.linear(1),style: TextStyle(
+                //             color: Constants.pimaryColor,
+                //             fontSize: 13,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //           ),
+                //           Text(
+                //             "${argumentDataList[0]['ndh']}",
+                //             softWrap: true,
+                //             overflow: TextOverflow.ellipsis,
+                //             maxLines: 2,
+                //             textScaler: TextScaler.linear(1),style: TextStyle(
+                //             color: Colors.grey,
+                //             fontSize: 14,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //           ),
+                //           // Text("CSMT",
+                //           //   textScaler: TextScaler.linear(1),style: TextStyle(
+                //           //     color: Colors.teal,
+                //           //     fontSize: 13,
+                //           //     fontWeight: FontWeight.w600,
+                //           //   ),
+                //           // ),
+                //         ],
+                //       )),
+                //   Container(
+                //     // width: 50,
+                //       padding: EdgeInsets.symmetric(vertical: 5, horizontal:4),
+                //       decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.circular(5),
+                //         color: Constants.whiteColor,
+                //       ),
+                //       child: Column(
+                //         mainAxisAlignment: MainAxisAlignment.start,
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           Text(
+                //             "SHIFT",
+                //             textScaler: TextScaler.linear(1),style: TextStyle(
+                //             color: Constants.pimaryColor,
+                //             fontSize: 13,
+                //             fontWeight: FontWeight.w600,
+                //           ),
+                //           ),
+                //     Text("${argumentDataList[0]['duty_shift']}",
+                //       softWrap: true,
+                //       overflow: TextOverflow.ellipsis,
+                //       maxLines: 2,
+                //       textScaler: TextScaler.linear(1),style: TextStyle(
+                //         color: Colors.grey,
+                //         fontSize: 14,
+                //         fontWeight: FontWeight.w600,
+                //       ),
+                //     ),
+                //         ],
+                //       )),
+                // ]),
               ),
               SizedBox(
                 height: 25,
               ),
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 12),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                margin: EdgeInsets.symmetric(horizontal:4),
+                padding: EdgeInsets.symmetric(horizontal:4, vertical: 2),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5),
@@ -338,7 +644,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                 height: 380,
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(horizontal: 8),
-                // padding: EdgeInsets.symmetric(horizontal: 20,vertical:2),
+                // padding: EdgeInsets.symmetric(horizontal:40,vertical:2),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5),
@@ -349,7 +655,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                           offset: Offset(2, 2))
                     ]),
                 child: ListView.builder(
-                  itemCount: 3,
+                  itemCount: argumentDataTrain.length,
                   // physics: NeverScrollableScrollPhysics(),
                   // shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
@@ -393,7 +699,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
                                             Text(
-                                              "FAST",
+                                              "${argumentDataTrain[index]['type']}",
                                               textScaler: TextScaler.linear(1),textAlign: TextAlign.start,style: TextStyle(
                                               color:Colors.teal,
                                               fontSize: 14,
@@ -401,7 +707,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                                             ),
                                             ),
                                             Text(
-                                              "A 45",
+                                              "${argumentDataTrain[index]['train_no']}",
                                                 textAlign: TextAlign.start,
                                               textScaler: TextScaler.linear(1),style: TextStyle(
                                               color: Colors.grey,
@@ -417,7 +723,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                                               ),
                                             ),
                                             Text(
-                                              "NON-A/C",
+                                              "${argumentDataTrain[index]['train_type']}",
                                                 textAlign: TextAlign.start,
                                               textScaler: TextScaler.linear(1),style: TextStyle(
                                               color:Colors.teal,
@@ -426,7 +732,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                                             ),
                                             ),
                                             Text(
-                                              "12 CAR",
+                                              "${argumentDataTrain[index]['car']}",
                                                 textAlign: TextAlign.start,
                                               textScaler: TextScaler.linear(1),style: TextStyle(
                                               color: Constants.pimaryColor,
@@ -467,7 +773,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                                                     CrossAxisAlignment.center,
                                                     children: [
                                                       Text(
-                                                        "CSMT",
+                                                        "${argumentDataTrain[index]['start_station']}",
                                                         textScaler: TextScaler.linear(1),style: TextStyle(
                                                         color:Colors.teal,
                                                         fontSize: 14,
@@ -475,7 +781,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                                                       ),
                                                       ),
                                                       Text(
-                                                        "17:05",
+                                                        "${argumentDataTrain[index]['start_time']}",
                                                         textScaler: TextScaler.linear(1),style: TextStyle(
                                                         color: Colors.grey,
                                                         fontSize: 14,
@@ -510,7 +816,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                                                     CrossAxisAlignment.center,
                                                     children: [
                                                       Text(
-                                                        "ABH",
+                                                        "${argumentDataTrain[index]['change_station']}",
                                                         textScaler: TextScaler.linear(1),style: TextStyle(
                                                         color:Colors.teal,
                                                         fontSize: 14,
@@ -518,7 +824,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                                                       ),
                                                       ),
                                                       Text(
-                                                        "18:23",
+                                                        "${argumentDataTrain[index]['change_time']}",
                                                         textScaler: TextScaler.linear(1),style: TextStyle(
                                                         color: Colors.grey,
                                                         fontSize: 14,
@@ -553,7 +859,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                                                     CrossAxisAlignment.center,
                                                     children: [
                                                       Text(
-                                                        "-",
+                                                        "${argumentDataTrain[index]['rt_rb']}",
                                                         textScaler: TextScaler.linear(1),style: TextStyle(
                                                         color:Colors.teal,
                                                         fontSize: 14,
@@ -583,7 +889,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                                                 )),
                                             child: Center(
                                                 child: Text(
-                                                  '-',textScaler: TextScaler.linear(1),style: TextStyle(
+                                                  '${argumentDataTrain[index]['station_name']}',textScaler: TextScaler.linear(1),style: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize: 13
                                                 ),)),
@@ -605,7 +911,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                                                 )),
                                             child: Center(
                                                 child: Text(
-                                                  '-',textScaler: TextScaler.linear(1),style: TextStyle(
+                                                  'Remarks',textScaler: TextScaler.linear(1),style: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize: 13
                                                 ),)),
@@ -668,7 +974,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
               Container(
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(horizontal: 8),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal:4, vertical: 8),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5)),
@@ -693,7 +999,7 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                     Container(
                       width: 130,
                       child: Text(
-                        "DO",
+                        "${argumentDataList[0]['holiday']}",
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         softWrap: true,
@@ -709,75 +1015,80 @@ class FindRoasterSetView extends GetView<FindRoasterSetController> {
                 ),
               ),
               SizedBox(height: 20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
 
-                  MaterialButton(
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                            color: Constants.secondaryColor
-                        )
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 18),
-                    onPressed: () {
+                    MaterialButton(
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(
+                              color: Constants.secondaryColor
+                          )
+                      ),
 
-                    },
-                    height: 32,
-                    minWidth: 78,
-
-                    color: Constants.secondaryColor,
-                    child: Center(
-                      child: Row(
-                        children: [
-                          Icon(Icons.add,color: Constants.whiteColor,),
-                          SizedBox(width: 10,),
-                          Text(
-                            "Add To Roaster",textScaler: TextScaler.linear(1),style: TextStyle(
-                              color: Constants.whiteColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400
-                          ),
-                          ),
-                        ],
+                      padding: EdgeInsets.symmetric(horizontal:8),
+                      onPressed: () {
+                        findRosterController.selectDate(context);
+                        findRosterController.selectSetNo(argumentDataList[0]['set_no']);
+                      },
+                      height: 38,
+                      minWidth: 78,
+                      color: Constants.secondaryColor,
+                      child: Center(
+                        child: Row(
+                          children: [
+                            Icon(Icons.add,color: Constants.whiteColor,),
+                            SizedBox(width: 10,),
+                            Text(
+                              "Add To Roaster",textScaler: TextScaler.linear(1),style: TextStyle(
+                                color: Constants.whiteColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400
+                            ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 28,),
-                  MaterialButton(
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                            color: Constants.pimaryColor
-                        )
-                    ),
-                    onPressed: () {
-                    },
-                    height: 32,
-                    minWidth: 70,
+                    SizedBox(width: 10,),
+                    MaterialButton(
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(
+                              color: Constants.pimaryColor
+                          )
+                      ),
+                      onPressed: () {
+                        findRosterController.selectDate1(context);
+                      },
+                      height: 38,
+                      minWidth: 70,
 
-                    color: Constants.pimaryColor,
-                    child: Center(
-                      child: Row(
-                        children: [
-                          Icon(Icons.alarm,color: Constants.whiteColor,),
-                          SizedBox(width: 5,),
-                          Text(
-                            "SET REMINDER",textScaler: TextScaler.linear(1),style: TextStyle(
-                              color: Constants.whiteColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400
-                          ),
-                          ),
-                        ],
+                      color: Constants.pimaryColor,
+                      child: Center(
+                        child: Row(
+                          children: [
+                            Icon(Icons.alarm,color: Constants.whiteColor,),
+                            SizedBox(width: 5,),
+                            Text(
+                              "SET REMINDER",textScaler: TextScaler.linear(1),style: TextStyle(
+                                color: Constants.whiteColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400
+                            ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              SizedBox(height: 35,),
+              SizedBox(height: 40,),
             ],
           ),
         ),

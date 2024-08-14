@@ -1,6 +1,7 @@
 class ProjectImage{
   static const String logo="assets/Images/logo.png";
   static const String title="assets/Images/title.png";
+  static const String folder="assets/Images/folder.png";
   static const String welcome="assets/Images/welcome.png";
   static const String train="assets/Images/train1.png";
   static const String train2="assets/Images/train2.png";

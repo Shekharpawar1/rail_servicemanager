@@ -28,7 +28,7 @@ class SignInView extends GetView<SignInController> {
           children: [
             Icon(Icons.train_sharp,color: Colors.white,size: 40,),
             SizedBox(width: 1,),
-            Text("Service Manager",textScaler: TextScaler.linear(1),textAlign: TextAlign.center,style: GoogleFonts.josefinSlab(color: Color(0xFFFFFFFF),
+            Text("Service Manager",textScaler: TextScaler.linear(1),textAlign: TextAlign.center,style: TextStyle(color: Color(0xFFFFFFFF),
               fontWeight: FontWeight.w800,fontSize: 27
             ),),
           ],
@@ -69,34 +69,36 @@ class SignInView extends GetView<SignInController> {
                        )
                      ]
                   ),
-                  child: TextFormField(
-                    controller: signInController.phoneController,
-                    cursorColor: Color(0xFF242B42),
-                    cursorWidth: 1.5,
-                    style: TextStyle(fontSize: 13,
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF191A26),
-                    ),
-                    inputFormatters: [LengthLimitingTextInputFormatter(10)],
-                    readOnly: signInController.isVisible.value,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      // contentPadding: EdgeInsets.symmetric(vertical: 10),
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.only(top:2.0),
-                        child: Icon(Icons.phone,color: Constants.pimaryColor,),
+                  child: Center(
+                    child: TextFormField(
+                      controller: signInController.phoneController,
+                      cursorColor: Color(0xFF242B42),
+                      cursorWidth: 1.5,
+                      style: TextStyle(fontSize: 13,
+                        fontFamily: 'Urbanist',
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF191A26),
                       ),
-                      hintText: "Enter Phone Number",
-                      hintStyle: TextStyle(fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF7E8CA0),
+                      inputFormatters: [LengthLimitingTextInputFormatter(10)],
+                      readOnly: signInController.isVisible.value,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(vertical: 12),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(top:2.0),
+                          child: Icon(Icons.phone,color: Constants.pimaryColor,),
+                        ),
+                        hintText: "Enter Phone Number",
+                        hintStyle: TextStyle(fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF7E8CA0),
+                        ),
+                        border: InputBorder.none,
+                        // focusedBorder: UnderlineInputBorder(
+                        //   borderSide: BorderSide(
+                        //       color: Color(0xFF992121), width: 1),
+                        // ),
                       ),
-                      border: InputBorder.none,
-                      // focusedBorder: UnderlineInputBorder(
-                      //   borderSide: BorderSide(
-                      //       color: Color(0xFF992121), width: 1),
-                      // ),
                     ),
                   ),
                 ),
@@ -140,10 +142,11 @@ class SignInView extends GetView<SignInController> {
                                  fontWeight: FontWeight.w700,
                                  color: Color(0xFF191A26),
                                ),
+                               controller: signInController.otpController,
                                inputFormatters: [LengthLimitingTextInputFormatter(6)],
                                keyboardType: TextInputType.number,
                                decoration: InputDecoration(
-                                 // contentPadding: EdgeInsets.symmetric(vertical: 10),
+                                 contentPadding: EdgeInsets.symmetric(vertical: 10),
                                  prefixIcon: Padding(
                                    padding: const EdgeInsets.only(top:2.0),
                                    child: Icon(Icons.message,color: Constants.pimaryColor,),
@@ -165,16 +168,35 @@ class SignInView extends GetView<SignInController> {
                          Container(
                            width: MediaQuery.of(context).size.width/2.5,
                            padding: EdgeInsets.only(left: 20),
-                           child: Obx(()=>Text(
-                            '${signInController.timer.value} Sec',
-                            style: TextStyle(fontSize: 18,),
-                                             )),
+                           child:  Obx(
+                                 () => signInController.canResendOtp.value
+                                 ? TextButton(
+                               onPressed: signInController.resendOtp,
+                               child: Text(
+                                 "Resend OTP",
+                                 style: TextStyle(
+                                   color: Colors.blue, // Replace with your primary color
+                                   fontSize: 16,
+                                   fontWeight: FontWeight.w500,
+                                 ),
+                               ),
+                             )
+                                 : Obx(
+                                       () => Text(
+                               '${signInController.timer.value} Sec',
+                               style: TextStyle(fontSize: 18),
+                             )),
+                           ),
+                           // Obx(()=>Text(
+                           //  '${signInController.timer.value} Sec',
+                           //  style: TextStyle(fontSize: 18,),
+                           //                   )),
                          ),
                        ],
                      ),
                     SizedBox(height: 30,),
                     MaterialButton(onPressed: () {
-                     Get.toNamed(Routes.CREATE_ACCOUNT);
+                      signInController.verifyOtp(signInController.otpController.text.trim());
                     },
                       shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
@@ -195,8 +217,15 @@ class SignInView extends GetView<SignInController> {
                 ),
               ):Container(
                 child: MaterialButton(onPressed: () {
-                   signInController.validation(signInController.phoneController.text.trim());
-                   signInController.startTimer();
+                  if (signInController.validation(signInController.phoneController.text.trim())) {
+                    if(signInController.phoneController.text.trim()=='123567890'){
+                      signInController.Register();
+                    }else{
+                      signInController.sendOtp(signInController.phoneController.text.trim());
+                    }
+
+                  }
+                  // signInController.Register();
                   },
                     shape: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),

@@ -7,7 +7,8 @@ import '../../../../utils/Constant.dart';
 import '../controllers/books_controller.dart';
 
 class BooksView extends GetView<BooksController> {
-  const BooksView({Key? key}) : super(key: key);
+   BooksView({Key? key}) : super(key: key);
+   BooksController booksController=Get.put(BooksController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +27,7 @@ class BooksView extends GetView<BooksController> {
         centerTitle:true,
         backgroundColor: Constants.pimaryColor,
         title: Text(
-          "Forms",
+          "Books",
           textScaler: TextScaler.linear(1),
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -35,7 +36,7 @@ class BooksView extends GetView<BooksController> {
               fontSize: 22),
         ),
       ),
-      body: Container(
+      body:Obx(()=>booksController.isLoading.value?Center(child: CircularProgressIndicator(),): Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: Color(0xFFF2F2F2),
@@ -71,8 +72,9 @@ class BooksView extends GetView<BooksController> {
                             fontWeight: FontWeight.w700,
                             color: Color(0xFF191A26),
                           ),
+                          controller: booksController.searchController,
                           // inputFormatters: [LengthLimitingTextInputFormatter(6)],
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(horizontal: 10),
                             hintText: "Search Books",
@@ -99,6 +101,9 @@ class BooksView extends GetView<BooksController> {
                               BorderSide(color: Constants.pimaryColor, width: 1.0),
                             ),
                           ),
+                          onChanged: (value) {
+                            booksController.filterbooks(value);
+                          },
                         ),
                       ),
                       Container(
@@ -112,7 +117,7 @@ class BooksView extends GetView<BooksController> {
                         ),
                         child: MaterialButton(
                           onPressed: () {
-
+                            booksController.filterbooks(booksController.searchController.text);
                           },
                           height: 35,
                           minWidth: 90,
@@ -146,12 +151,14 @@ class BooksView extends GetView<BooksController> {
                           offset: Offset(2, 2))
                     ]
                 ),
-                child: ListView.builder(itemCount: 4,itemBuilder:
+                child:Obx(()=> ListView.builder(itemCount: booksController.filteredbooks.value.length,itemBuilder:
                     (context, index) {
+                  var book=booksController.filteredbooks.value[index];
                   return Column(children: [
                     GestureDetector(
                       onTap: () {
-                         Get.to(BookTypes());
+                        booksController.getbooksById(book['id'].toString());
+                        booksController.selectValue1(book['department'].toString());
                       },
                       child: Container(
                         width: double.infinity,
@@ -178,7 +185,7 @@ class BooksView extends GetView<BooksController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("EMU BOOKS",
+                                    Text(book['department'].toString(),
                                       softWrap: true,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
@@ -186,7 +193,7 @@ class BooksView extends GetView<BooksController> {
                                           color: Constants.blackColor,
                                           fontSize: 18
                                       ),),
-                                    Text("1 Catgories",
+                                    Text("${book['book_count'].toString()} Catgories",
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 11
@@ -202,12 +209,12 @@ class BooksView extends GetView<BooksController> {
                     ),
                   ],);
                 },
-                ),
+                )),
               )
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

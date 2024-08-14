@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdlController extends GetxController{
   var adlAllpayController=TextEditingController();
@@ -13,6 +14,17 @@ class AdlController extends GetxController{
     } else {
       result.value = 0;
     }
+  }
+   RxString pfNo=''.obs;
+  void getData()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    pfNo.value=  (await prefs.getString('pfNo'))!;
+    print("Divy=====================>user1${pfNo.value}");
+    adlAllpayController.text=pfNo.value.toString();
+  }
+  @override
+  void onInit() {
+    super.onInit();
   }
 }
 

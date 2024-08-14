@@ -7,7 +7,8 @@ import '../../../../utils/Constant.dart';
 import '../controllers/forms_controller.dart';
 
 class FormsView extends GetView<FormsController> {
-  const FormsView({Key? key}) : super(key: key);
+   FormsView({Key? key}) : super(key: key);
+   FormsController formsController=Get.put(FormsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,7 @@ class FormsView extends GetView<FormsController> {
               fontSize: 22),
         ),
       ),
-      body: Container(
+      body:Obx(()=>formsController.isLoading.value?Center(child: CircularProgressIndicator(),):Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: Color(0xFFF2F2F2),
@@ -71,8 +72,9 @@ class FormsView extends GetView<FormsController> {
                             fontWeight: FontWeight.w700,
                             color: Color(0xFF191A26),
                           ),
+                          controller: formsController.searchController,
                           // inputFormatters: [LengthLimitingTextInputFormatter(6)],
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(horizontal: 10),
                             hintText: "Search Forms",
@@ -99,6 +101,9 @@ class FormsView extends GetView<FormsController> {
                               BorderSide(color: Constants.pimaryColor, width: 1.0),
                             ),
                           ),
+                          onChanged: (value) {
+                            formsController.filterForms(value);
+                          },
                         ),
                       ),
                       Container(
@@ -112,7 +117,7 @@ class FormsView extends GetView<FormsController> {
                         ),
                         child: MaterialButton(
                           onPressed: () {
-
+                            formsController.filterForms(formsController.searchController.text);
                           },
                           height: 35,
                           minWidth: 90,
@@ -146,12 +151,14 @@ class FormsView extends GetView<FormsController> {
                           offset: Offset(2, 2))
                     ]
                 ),
-                child: ListView.builder(itemCount: 1,itemBuilder:
+                child:Obx(()=>  ListView.builder(itemCount: formsController.filteredforms.value.length,itemBuilder:
                     (context, index) {
+                  var form=formsController.filteredforms.value[index];
                   return Column(children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
-                         Get.to(FormTypes());
+                        formsController.getFormById(form['id'].toString());
+                        formsController.selectValue1(form['department'].toString());
                       },
                       child: Container(
                         width: double.infinity,
@@ -178,7 +185,7 @@ class FormsView extends GetView<FormsController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("LEAVE FORM",
+                                    Text(form['department'],
                                       softWrap: true,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
@@ -186,7 +193,7 @@ class FormsView extends GetView<FormsController> {
                                           color: Constants.blackColor,
                                           fontSize: 18
                                       ),),
-                                    Text("1 Catgories",
+                                    Text("${form['form_count']} Catgories",
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 11
@@ -203,11 +210,12 @@ class FormsView extends GetView<FormsController> {
                   ],);
                 },
                 ),
+                ),
               )
             ],
           ),
         ),
       ),
-    );
+    ));
   }
 }

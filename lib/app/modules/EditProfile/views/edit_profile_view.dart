@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/_http/_io/_file_decoder_io.dart';
 import 'package:serviceman/utils/Constant.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/edit_profile_controller.dart';
 
 class EditProfileView extends GetView<EditProfileController> {
-  const EditProfileView({Key? key}) : super(key: key);
+   EditProfileView({Key? key}) : super(key: key);
+   EditProfileController editProfileController=Get.put(EditProfileController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,28 +66,40 @@ class EditProfileView extends GetView<EditProfileController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
+                Obx(()=>  Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                    Text("Ashok gehlot",style: TextStyle(
+                    Text("${editProfileController.name.value}",style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
                       fontSize: 20,
                     ),),
-                    Text("CR",style: TextStyle(
+                      Text("${editProfileController.pfNumber.value}",style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.blueGrey,
+                        height: 0.9,
+                        fontSize: 16,
+                      ),),
+                      Text("${editProfileController.basicPay.value}/-",style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: Colors.blueGrey,
                       height: 0.9,
                       fontSize: 16,
                     ),),
-                    Text("Sub-TM",style: TextStyle(
+                      Text("${editProfileController.railway.value}",style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: Colors.blueGrey,
                       height: 0.9,
                       fontSize: 16,
                     ),),
-                    Text("+918898745744",style: TextStyle(
+                    Text("${editProfileController.division.value}",style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.blueGrey,
+                      height: 0.9,
+                      fontSize: 16,
+                    ),),
+                    Text("+91${editProfileController.number.value}",style: TextStyle(
                       letterSpacing: 0.1,
                       wordSpacing: 0.1,
                       height: 0.9,
@@ -93,7 +107,7 @@ class EditProfileView extends GetView<EditProfileController> {
                       color: Colors.blueGrey,
                       fontSize: 16,
                     ),)
-                  ],),
+                  ],)),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -127,19 +141,24 @@ class EditProfileView extends GetView<EditProfileController> {
                                 child: Icon(Icons.perm_identity,size: 60,color: Colors.black,))),
                       ),
                       // SizedBox(height: 10,),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15,vertical:6),
-                         margin: EdgeInsets.only(right:8,top: 8),
-                        decoration: BoxDecoration(
-                            color:Constants.pimaryColor,
-                            borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Edit Profile",style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
+                      InkWell(
+                        onTap: () {
+                          Get.toNamed(Routes.CREATE_ACCOUNT,arguments: 'Edit Profile');
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 15,vertical:6),
+                           margin: EdgeInsets.only(right:8,top: 8),
+                          decoration: BoxDecoration(
+                              color:Constants.pimaryColor,
+                              borderRadius: BorderRadius.circular(5)
                           ),
+                          child: Center(
+                            child: Text(
+                              "Edit Profile",style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                            ),
                           ),
                         ),
                       ),
@@ -249,7 +268,7 @@ class EditProfileView extends GetView<EditProfileController> {
               ),
               child: MaterialButton(
                 onPressed: () {
-
+                editProfileController.showExitConfirmationDialog(context);
                 },
                 height: 40,
                 minWidth: 90,
@@ -264,7 +283,6 @@ class EditProfileView extends GetView<EditProfileController> {
               ),
             ),
           ],
-
         ),
       ),
     );

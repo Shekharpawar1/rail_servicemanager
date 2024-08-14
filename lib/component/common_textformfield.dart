@@ -11,10 +11,13 @@ class CommonTextFormField extends StatelessWidget {
   TextInputType keyboardTypes;
   TextEditingController controller;
   int? maxline;
+  TextInputFormatter? input;
+  Widget? icons;
+ final FormFieldValidator? validator;
   // final FormFieldValidator? validator;
 
   CommonTextFormField({required this.labletext, required this.keyboardTypes,
-     required this.controller,this.maxline});
+     required this.controller,this.maxline,this.input,this.icons,this.validator});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +31,11 @@ class CommonTextFormField extends StatelessWidget {
         textInputAction: TextInputAction.done,
         keyboardType: keyboardTypes,
         maxLines: maxline,
-        inputFormatters: [LengthLimitingTextInputFormatter(20)],
+        onChanged:validator,
+        inputFormatters: [
+          if (input != null) input!,
+        LengthLimitingTextInputFormatter(20),
+        ],
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(left: 10,top: 2),
           labelText: labletext,
@@ -37,6 +44,7 @@ class CommonTextFormField extends StatelessWidget {
             fontSize:14,
             fontWeight:FontWeight.w400,
           ),
+          suffix: icons,
           floatingLabelStyle: TextStyle(
             color:Colors.blue,
             fontSize:14,

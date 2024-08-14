@@ -5,8 +5,6 @@ import '../controllers/contacts_controller.dart';
 class ContactsBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ContactsController>(
-      () => ContactsController(),
-    );
+    Get.put(ContactsController());
   }
 }

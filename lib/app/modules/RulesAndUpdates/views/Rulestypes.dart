@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:serviceman/app/modules/RulesAndUpdates/controllers/rules_and_updates_controller.dart';
 import 'package:serviceman/app/modules/RulesAndUpdates/views/rulestypeDetails.dart';
 
 import '../../../../utils/Constant.dart';
 
 class RulesType extends StatelessWidget {
-  const RulesType({super.key});
-
+   RulesType({super.key});
+RulesAndUpdatesController ruleTypeController=Get.put(RulesAndUpdatesController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +28,7 @@ class RulesType extends StatelessWidget {
         centerTitle:true,
         backgroundColor: Constants.pimaryColor,
         title: Text(
-          "Circular",
+          ruleTypeController.selectedValue1.value,
           textScaler: TextScaler.linear(1),
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -36,7 +37,11 @@ class RulesType extends StatelessWidget {
               fontSize: 22),
         ),
       ),
-      body: Container(
+      body: Obx(() {
+      if (ruleTypeController.isLoading.value) {
+        return Center(child: CircularProgressIndicator());
+      } else {
+        return  Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: Color(0xFFF2F2F2),
@@ -73,7 +78,8 @@ class RulesType extends StatelessWidget {
                             color: Color(0xFF191A26),
                           ),
                           // inputFormatters: [LengthLimitingTextInputFormatter(6)],
-                          keyboardType: TextInputType.number,
+                          controller: ruleTypeController.searchbyidController,
+                          keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(horizontal: 10),
                             hintText: "Search Rules",
@@ -100,6 +106,9 @@ class RulesType extends StatelessWidget {
                               BorderSide(color: Constants.pimaryColor, width: 1.0),
                             ),
                           ),
+                          onChanged: (value) {
+                            ruleTypeController.filterrulesbyDep(value);
+                          },
                         ),
                       ),
                       Container(
@@ -113,7 +122,7 @@ class RulesType extends StatelessWidget {
                         ),
                         child: MaterialButton(
                           onPressed: () {
-          
+                            ruleTypeController.filterrulesbyDep(ruleTypeController.searchbyidController.text);
                           },
                           height: 35,
                           minWidth: 90,
@@ -147,12 +156,26 @@ class RulesType extends StatelessWidget {
                           offset: Offset(2, 2))
                     ]
                 ),
-                child: ListView.builder(itemCount: 5,itemBuilder:
+                child: (ruleTypeController.isLoading.value)
+                    ? Center(child: CircularProgressIndicator())
+                    : (ruleTypeController
+                    .rulesbyDep.value.isEmpty)
+                    ? Container(
+                    child: Center(
+                        child: Text(
+                            textScaler: TextScaler.linear(1.0),
+                            "Rules Not Found",
+                            style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500))))
+                    :  ListView.builder(itemCount: ruleTypeController.filteredrulesbyDep.value.length,itemBuilder:
                     (context, index) {
+                      var rule=ruleTypeController.filteredrulesbyDep.value[index];
                   return Column(children: [
                     GestureDetector(
                       onTap: () {
-                        Get.to(RulesTypeDetails());
+                       ruleTypeController.getRulesByIdDetial(rule['id'].toString());
+                       ruleTypeController.selectValue2(rule['category'].toString());
                       },
                       child: Container(
                         width: double.infinity,
@@ -180,7 +203,7 @@ class RulesType extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Important Information",
+                                    Text(rule['category'].toString(),
                                       softWrap: true,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
@@ -199,12 +222,11 @@ class RulesType extends StatelessWidget {
                     ),
                   ],);
                 },
-                ),
-              )
+                )),
             ],
           ),
         ),
-      ),
+      );}})
     );
   }
 }

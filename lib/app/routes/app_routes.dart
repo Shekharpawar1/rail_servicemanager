@@ -23,6 +23,10 @@ abstract class Routes {
   static const FIND_ROASTER_SET = _Paths.FIND_ROASTER_SET;
   static const COMING_SOON = _Paths.COMING_SOON;
   static const VIDEOS = _Paths.VIDEOS;
+  static const AUDIO = _Paths.AUDIO;
+  static const AUDIOPLAY = _Paths.AUDIOPLAY;
+  static const TEST = _Paths.TEST;
+  static const ALERT = _Paths.Alert;
 }
 
 abstract class _Paths {
@@ -47,4 +51,8 @@ abstract class _Paths {
   static const FIND_ROASTER_SET = '/find-roaster-set';
   static const COMING_SOON = '/coming-soon';
   static const VIDEOS = '/videos';
+  static const AUDIO = '/audio';
+  static const AUDIOPLAY = '/audioplay';
+  static const TEST = '/test';
+  static const Alert = '/alert';
 }

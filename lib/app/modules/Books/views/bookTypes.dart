@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:serviceman/app/modules/Books/controllers/books_controller.dart';
 import 'package:serviceman/app/modules/Books/views/BookTypeDetails.dart';
 
 import '../../../../utils/Constant.dart';
 
 class BookTypes extends StatelessWidget {
-  const BookTypes({super.key});
-
+   BookTypes({super.key});
+   BooksController bookTypeController=Get.put(BooksController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +28,7 @@ class BookTypes extends StatelessWidget {
         centerTitle:true,
         backgroundColor: Constants.pimaryColor,
         title: Text(
-          "EMU BOOKS",
+          bookTypeController.selectedValue1.value.toString(),
           textScaler: TextScaler.linear(1),
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -36,7 +37,11 @@ class BookTypes extends StatelessWidget {
               fontSize: 22),
         ),
       ),
-      body: Container(
+      body:Obx(() {
+        if (bookTypeController.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        } else {
+          return Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: Color(0xFFF2F2F2),
@@ -73,7 +78,8 @@ class BookTypes extends StatelessWidget {
                             color: Color(0xFF191A26),
                           ),
                           // inputFormatters: [LengthLimitingTextInputFormatter(6)],
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
+                          controller: bookTypeController.searchbyidController,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(horizontal: 10),
                             hintText: "Search Books",
@@ -100,6 +106,9 @@ class BookTypes extends StatelessWidget {
                               BorderSide(color: Constants.pimaryColor, width: 1.0),
                             ),
                           ),
+                          onChanged: (value) {
+                            bookTypeController.filterbooksbyDep(value);
+                          },
                         ),
                       ),
                       Container(
@@ -113,7 +122,7 @@ class BookTypes extends StatelessWidget {
                         ),
                         child: MaterialButton(
                           onPressed: () {
-
+                            bookTypeController.filterbooksbyDep(bookTypeController.searchbyidController.text);
                           },
                           height: 35,
                           minWidth: 90,
@@ -147,12 +156,26 @@ class BookTypes extends StatelessWidget {
                           offset: Offset(2, 2))
                     ]
                 ),
-                child: ListView.builder(itemCount: 1,itemBuilder:
+                child:Obx(()=> (bookTypeController.isLoading.value)
+                    ? Center(child: CircularProgressIndicator())
+                    : (bookTypeController
+                    .booksbyDep.value.isEmpty)
+                    ? Container(
+                    child: Center(
+                        child: Text(
+                            textScaler: TextScaler.linear(1.0),
+                            "Books Not Found",
+                            style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w500))))
+                    :  ListView.builder(itemCount: bookTypeController.filteredbooksbyDep.value.length,itemBuilder:
                     (context, index) {
+                      var book=bookTypeController.filteredbooksbyDep.value[index];
                   return Column(children: [
                     GestureDetector(
                       onTap: () {
-                         Get.to(BookTypeDetails());
+                        bookTypeController.getbooksByIdDetial(book['id'].toString());
+                        bookTypeController.selectValue2(book['category'].toString());
                       },
                       child: Container(
                         width: double.infinity,
@@ -180,7 +203,7 @@ class BookTypes extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("GUARD EMU BOOKS",
+                                    Text(book['category'].toString(),
                                       softWrap: true,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
@@ -199,12 +222,12 @@ class BookTypes extends StatelessWidget {
                     ),
                   ],);
                 },
-                ),
+                )),
               )
             ],
           ),
         ),
-      ),
+      );}})
     );
   }
 }

@@ -20,7 +20,7 @@ class SplashView extends GetView<SplashController> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 225,),
+            SizedBox(height: MediaQuery.of(context).size.height*0.25,),
             ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: Image.asset(
@@ -33,7 +33,7 @@ class SplashView extends GetView<SplashController> {
             Text("Service Manager",style: TextStyle(color: Color(0xFF042c6b),fontWeight: FontWeight.w900,fontSize: 25),),
             // SizedBox(height: 10,),
 
-             SizedBox(height: 160,),
+             SizedBox(height: MediaQuery.of(context).size.height*0.16,),
             CircularProgressIndicator(
               backgroundColor:Color(0xFF042c6b),
               color: Color(0xFFAC1013),

@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:serviceman/app/modules/DutyRecords/controllers/duty_records_controller.dart';
 import 'package:serviceman/app/modules/DutyRecords/controllers/leavepage_controller.dart';
 import 'package:serviceman/component/common_textformfield.dart';
 
@@ -12,6 +13,7 @@ import '../../../../../utils/Constant.dart';
 class LeavePageView extends StatelessWidget {
    LeavePageView({super.key});
   LeavePageController leavepageController=Get.put(LeavePageController());
+  DutyRecordsController dutyRecordsController=Get.put(DutyRecordsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,11 +86,11 @@ class LeavePageView extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 20,),
-              Obx(() => Text("Selected Date: ${DateFormat('dd-MM-yyyy').format(leavepageController.selectedDate.value).toString()}")),
+              Obx(() => Text("Selected Date: ${DateFormat('dd/MM/yy').format(leavepageController.selectedDate.value).toString()}")),
               SizedBox(height: 20,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: CommonTextFormField(labletext: "Reason", keyboardTypes: TextInputType.text, controller:leavepageController.raesonController,maxline: 5,),
+                child: CommonTextFormField(labletext: "Reason", keyboardTypes: TextInputType.text, controller:leavepageController.reasonController,maxline: 5,),
               ),
               SizedBox(height: 20,),
               Align(
@@ -158,7 +160,8 @@ class LeavePageView extends StatelessWidget {
                       )
                   ),
                   onPressed: () {
-                    leavepageController.selectDate(context);
+                    leavepageController.addLeave();
+                    dutyRecordsController.getLeaveHistory(dutyRecordsController.searchDateController.text);
                   },
                   height: 38,
                   minWidth: 90,

@@ -1,4 +1,4 @@
-package com.techpanda.serviceman
+package com.techpanda.servicemanagers
 
 import io.flutter.embedding.android.FlutterActivity
 

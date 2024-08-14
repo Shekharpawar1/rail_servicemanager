@@ -8,6 +8,7 @@ import '../controllers/rules_and_updates_controller.dart';
 
 class RulesAndUpdatesView extends GetView<RulesAndUpdatesController> {
    RulesAndUpdatesView({Key? key}) : super(key: key);
+   RulesAndUpdatesController rulesAndUpdatesController=Get.put(RulesAndUpdatesController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,7 @@ class RulesAndUpdatesView extends GetView<RulesAndUpdatesController> {
               fontSize: 22),
         ),
       ),
-      body: Container(
+      body:Obx(()=>rulesAndUpdatesController.isLoading.value?Center(child: CircularProgressIndicator(),):Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: Color(0xFFF2F2F2),
@@ -71,8 +72,9 @@ class RulesAndUpdatesView extends GetView<RulesAndUpdatesController> {
                             fontWeight: FontWeight.w700,
                             color: Color(0xFF191A26),
                           ),
+                          controller: rulesAndUpdatesController.searchController,
                           // inputFormatters: [LengthLimitingTextInputFormatter(6)],
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(horizontal: 10),
                             hintText: "Search Rules",
@@ -99,6 +101,9 @@ class RulesAndUpdatesView extends GetView<RulesAndUpdatesController> {
                               BorderSide(color: Constants.pimaryColor, width: 1.0),
                             ),
                           ),
+                          onChanged: (value) {
+                            rulesAndUpdatesController.filterrules(value);
+                          },
                         ),
                       ),
                       Container(
@@ -112,7 +117,7 @@ class RulesAndUpdatesView extends GetView<RulesAndUpdatesController> {
                         ),
                         child: MaterialButton(
                           onPressed: () {
-          
+                            rulesAndUpdatesController.filterrules(rulesAndUpdatesController.searchController.text);
                           },
                           height: 35,
                           minWidth: 90,
@@ -146,13 +151,15 @@ class RulesAndUpdatesView extends GetView<RulesAndUpdatesController> {
                           offset: Offset(2, 2))
                     ]
                 ),
-                child: ListView.builder(itemCount: 6,itemBuilder:
+                child:Obx(()=> ListView.builder(itemCount: rulesAndUpdatesController.filteredrules.length,itemBuilder:
                     (context, index) {
+                  var rule= rulesAndUpdatesController.filteredrules[index];
                   return Column(children: [
                     GestureDetector(
                       onTap: () {
-                         Get.to(RulesType());
-                      },
+                        rulesAndUpdatesController.getrulesById(rule['id'].toString());
+                        rulesAndUpdatesController.selectValue1(rule['department'].toString());
+                        },
                       child: Container(
                         width: double.infinity,
                         padding: EdgeInsets.symmetric(vertical: 15),
@@ -178,7 +185,7 @@ class RulesAndUpdatesView extends GetView<RulesAndUpdatesController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Circular",
+                                    Text(rule['department'].toString(),
                                       softWrap: true,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
@@ -186,7 +193,7 @@ class RulesAndUpdatesView extends GetView<RulesAndUpdatesController> {
                                           color: Constants.blackColor,
                                           fontSize: 18
                                       ),),
-                                    Text("3 Catgories",
+                                    Text("${rule['category_count']} Catgories",
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 11
@@ -202,12 +209,12 @@ class RulesAndUpdatesView extends GetView<RulesAndUpdatesController> {
                     ),
                   ],);
                 },
-                ),
+                )),
               )
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

@@ -9,7 +9,8 @@ import '../../../routes/app_pages.dart';
 import '../controllers/roaster_controller.dart';
 
 class RoasterView extends GetView<RoasterController> {
-  const RoasterView({Key? key}) : super(key: key);
+   RoasterView({Key? key}) : super(key: key);
+   RoasterController rosterController=Get.put(RoasterController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +82,7 @@ class RoasterView extends GetView<RoasterController> {
                                 fontWeight: FontWeight.w700,
                                 color: Color(0xFF191A26),
                               ),
+                              controller: rosterController.searchCotroller,
                               // inputFormatters: [LengthLimitingTextInputFormatter(6)],
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
@@ -106,7 +108,8 @@ class RoasterView extends GetView<RoasterController> {
                           ),
                           child: MaterialButton(
                             onPressed: () {
-                               Get.toNamed(Routes.FIND_ROASTER_SET);
+                              rosterController.getSets(rosterController.searchCotroller.text.toString());
+                               // Get.toNamed(Routes.FIND_ROASTER_SET);
                             },
                             height: 38,
                             minWidth: 78,
@@ -129,262 +132,262 @@ class RoasterView extends GetView<RoasterController> {
               ),
             ),
             SizedBox(height: 20,),
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              margin: EdgeInsets.symmetric(horizontal: 12),
-              decoration:BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(color:Colors.black38,
-                        blurRadius: 4,
-                        offset: Offset(2, 2))
-                  ]
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 8,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                     Text.rich(
-                       TextSpan(
-                         children: [
-                           TextSpan(
-                             text: "SET",
-                             style: TextStyle(
-                               fontWeight: FontWeight.w500,
-                               fontSize: 13,
-                               color: Colors.black
-                             )
-                           ),
-                           TextSpan(
-                               text: ":",
-                               style: TextStyle(
-                                   fontWeight: FontWeight.w500,
-                                   fontSize: 13,
-                                   color: Colors.black
-                               )
-                           ),
-                           TextSpan(
-                               text: "36",
-                               style: TextStyle(
-                                   fontWeight: FontWeight.w400,
-                                   fontSize: 13,
-                                   color: Colors.black
-                               )
-                           )
-                         ]
-                       ),
-                     ),
-                      Text.rich(
-                        TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: "SIGN ON",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.black
-                                  )
-                              ),
-                              TextSpan(
-                                  text: ":",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.black
-                                  )
-                              ),
-                              TextSpan(
-                                  text: "13.39",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 13,
-                                      color: Colors.black
-                                  )
-                              )
-                            ]
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 12,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text.rich(
-                        TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: "Date",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.black
-                                  )
-                              ),
-                              TextSpan(
-                                  text: ":",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.black
-                                  )
-                              ),
-                              TextSpan(
-                                  text: "22-07-2021",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 13,
-                                      color: Colors.black
-                                  )
-                              )
-                            ]
-                        ),
-                      ),
-                      Text.rich(
-                        TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: "SiGN OFF",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.black
-                                  )
-                              ),
-                              TextSpan(
-                                  text: ":",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: Colors.black
-                                  )
-                              ),
-                              TextSpan(
-                                  text: "21.39",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 13,
-                                      color: Colors.black
-                                  )
-                              )
-                            ]
-                        ),
-                      )
-                    ],
-                  ),
-                  Divider(color: Color(0xFFF2F2F2),thickness: 1.1,),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 5,vertical:3),
-                        decoration: BoxDecoration(
-                            color:Colors.green,
-                            borderRadius: BorderRadius.circular(5)
-                        ),
-                        child: Center(
-                          child: Text.rich(
-                            TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: "Status",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 13,
-                                          color: Constants.whiteColor
-                                      )
-                                  ),
-                                  TextSpan(
-                                      text: ":",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 13,
-                                          color: Constants.whiteColor
-                                      )
-                                  ),
-                                  TextSpan(
-                                      text: "Active",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 13,
-                                          color: Constants.whiteColor
-                                      )
-                                  )
-                                ]
-                            ),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          MaterialButton(
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                borderSide: BorderSide(
-                                    color: Constants.pimaryColor
-                                )
-                            ),
-                            onPressed: () {
-
-                            },
-                            height: 32,
-                            minWidth: 70,
-
-                            color: Constants.pimaryColor,
-                            child: Center(
-                              child: Text(
-                                "Track",style: TextStyle(
-                                  color: Constants.whiteColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400
-                              ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 28,),
-                          MaterialButton(
-                            shape: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              borderSide: BorderSide(
-                                color: Constants.secondaryColor
-                              )
-                            ),
-                            padding: EdgeInsets.symmetric(horizontal: 8),
-                            onPressed: () {
-
-                            },
-                            height: 32,
-                            minWidth: 70,
-
-                            color: Constants.secondaryColor,
-                            child: Center(
-                              child: Text(
-                                "Remove",style: TextStyle(
-                                  color: Constants.whiteColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400
-                              ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            // Container(
+            //   width: double.infinity,
+            //   padding: EdgeInsets.symmetric(horizontal: 8),
+            //   margin: EdgeInsets.symmetric(horizontal: 12),
+            //   decoration:BoxDecoration(
+            //       color: Colors.white,
+            //       borderRadius: BorderRadius.circular(10),
+            //       boxShadow: [
+            //         BoxShadow(color:Colors.black38,
+            //             blurRadius: 4,
+            //             offset: Offset(2, 2))
+            //       ]
+            //   ),
+            //   child: Column(
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: [
+            //       SizedBox(height: 8,),
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         crossAxisAlignment: CrossAxisAlignment.center,
+            //         children: [
+            //          Text.rich(
+            //            TextSpan(
+            //              children: [
+            //                TextSpan(
+            //                  text: "SET",
+            //                  style: TextStyle(
+            //                    fontWeight: FontWeight.w500,
+            //                    fontSize: 13,
+            //                    color: Colors.black
+            //                  )
+            //                ),
+            //                TextSpan(
+            //                    text: ":",
+            //                    style: TextStyle(
+            //                        fontWeight: FontWeight.w500,
+            //                        fontSize: 13,
+            //                        color: Colors.black
+            //                    )
+            //                ),
+            //                TextSpan(
+            //                    text: "36",
+            //                    style: TextStyle(
+            //                        fontWeight: FontWeight.w400,
+            //                        fontSize: 13,
+            //                        color: Colors.black
+            //                    )
+            //                )
+            //              ]
+            //            ),
+            //          ),
+            //           Text.rich(
+            //             TextSpan(
+            //                 children: [
+            //                   TextSpan(
+            //                       text: "SIGN ON",
+            //                       style: TextStyle(
+            //                           fontWeight: FontWeight.w500,
+            //                           fontSize: 13,
+            //                           color: Colors.black
+            //                       )
+            //                   ),
+            //                   TextSpan(
+            //                       text: ":",
+            //                       style: TextStyle(
+            //                           fontWeight: FontWeight.w500,
+            //                           fontSize: 13,
+            //                           color: Colors.black
+            //                       )
+            //                   ),
+            //                   TextSpan(
+            //                       text: "13.39",
+            //                       style: TextStyle(
+            //                           fontWeight: FontWeight.w400,
+            //                           fontSize: 13,
+            //                           color: Colors.black
+            //                       )
+            //                   )
+            //                 ]
+            //             ),
+            //           )
+            //         ],
+            //       ),
+            //       SizedBox(height: 12,),
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         crossAxisAlignment: CrossAxisAlignment.center,
+            //         children: [
+            //           Text.rich(
+            //             TextSpan(
+            //                 children: [
+            //                   TextSpan(
+            //                       text: "Date",
+            //                       style: TextStyle(
+            //                           fontWeight: FontWeight.w500,
+            //                           fontSize: 13,
+            //                           color: Colors.black
+            //                       )
+            //                   ),
+            //                   TextSpan(
+            //                       text: ":",
+            //                       style: TextStyle(
+            //                           fontWeight: FontWeight.w500,
+            //                           fontSize: 13,
+            //                           color: Colors.black
+            //                       )
+            //                   ),
+            //                   TextSpan(
+            //                       text: "22-07-2021",
+            //                       style: TextStyle(
+            //                           fontWeight: FontWeight.w400,
+            //                           fontSize: 13,
+            //                           color: Colors.black
+            //                       )
+            //                   )
+            //                 ]
+            //             ),
+            //           ),
+            //           Text.rich(
+            //             TextSpan(
+            //                 children: [
+            //                   TextSpan(
+            //                       text: "SiGN OFF",
+            //                       style: TextStyle(
+            //                           fontWeight: FontWeight.w500,
+            //                           fontSize: 13,
+            //                           color: Colors.black
+            //                       )
+            //                   ),
+            //                   TextSpan(
+            //                       text: ":",
+            //                       style: TextStyle(
+            //                           fontWeight: FontWeight.w500,
+            //                           fontSize: 13,
+            //                           color: Colors.black
+            //                       )
+            //                   ),
+            //                   TextSpan(
+            //                       text: "21.39",
+            //                       style: TextStyle(
+            //                           fontWeight: FontWeight.w400,
+            //                           fontSize: 13,
+            //                           color: Colors.black
+            //                       )
+            //                   )
+            //                 ]
+            //             ),
+            //           )
+            //         ],
+            //       ),
+            //       Divider(color: Color(0xFFF2F2F2),thickness: 1.1,),
+            //       Row(
+            //         crossAxisAlignment: CrossAxisAlignment.center,
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Container(
+            //             padding: EdgeInsets.symmetric(horizontal: 5,vertical:3),
+            //             decoration: BoxDecoration(
+            //                 color:Colors.green,
+            //                 borderRadius: BorderRadius.circular(5)
+            //             ),
+            //             child: Center(
+            //               child: Text.rich(
+            //                 TextSpan(
+            //                     children: [
+            //                       TextSpan(
+            //                           text: "Status",
+            //                           style: TextStyle(
+            //                               fontWeight: FontWeight.w500,
+            //                               fontSize: 13,
+            //                               color: Constants.whiteColor
+            //                           )
+            //                       ),
+            //                       TextSpan(
+            //                           text: ":",
+            //                           style: TextStyle(
+            //                               fontWeight: FontWeight.w500,
+            //                               fontSize: 13,
+            //                               color: Constants.whiteColor
+            //                           )
+            //                       ),
+            //                       TextSpan(
+            //                           text: "Active",
+            //                           style: TextStyle(
+            //                               fontWeight: FontWeight.w400,
+            //                               fontSize: 13,
+            //                               color: Constants.whiteColor
+            //                           )
+            //                       )
+            //                     ]
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //           Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             crossAxisAlignment: CrossAxisAlignment.center,
+            //             children: [
+            //               MaterialButton(
+            //                 shape: OutlineInputBorder(
+            //                     borderRadius: BorderRadius.circular(5),
+            //                     borderSide: BorderSide(
+            //                         color: Constants.pimaryColor
+            //                     )
+            //                 ),
+            //                 onPressed: () {
+            //
+            //                 },
+            //                 height: 32,
+            //                 minWidth: 70,
+            //
+            //                 color: Constants.pimaryColor,
+            //                 child: Center(
+            //                   child: Text(
+            //                     "Track",style: TextStyle(
+            //                       color: Constants.whiteColor,
+            //                       fontSize: 14,
+            //                       fontWeight: FontWeight.w400
+            //                   ),
+            //                   ),
+            //                 ),
+            //               ),
+            //               SizedBox(width: 28,),
+            //               MaterialButton(
+            //                 shape: OutlineInputBorder(
+            //                   borderRadius: BorderRadius.circular(5),
+            //                   borderSide: BorderSide(
+            //                     color: Constants.secondaryColor
+            //                   )
+            //                 ),
+            //                 padding: EdgeInsets.symmetric(horizontal: 8),
+            //                 onPressed: () {
+            //
+            //                 },
+            //                 height: 32,
+            //                 minWidth: 70,
+            //
+            //                 color: Constants.secondaryColor,
+            //                 child: Center(
+            //                   child: Text(
+            //                     "Remove",style: TextStyle(
+            //                       color: Constants.whiteColor,
+            //                       fontSize: 14,
+            //                       fontWeight: FontWeight.w400
+            //                   ),
+            //                   ),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       )

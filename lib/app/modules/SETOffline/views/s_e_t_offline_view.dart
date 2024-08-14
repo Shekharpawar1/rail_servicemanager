@@ -6,7 +6,8 @@ import '../../../../utils/Constant.dart';
 import '../controllers/s_e_t_offline_controller.dart';
 
 class SETOfflineView extends GetView<SETOfflineController> {
-  const SETOfflineView({Key? key}) : super(key: key);
+   SETOfflineView({Key? key}) : super(key: key);
+  SETOfflineController setOfflineController=SETOfflineController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,6 +79,7 @@ class SETOfflineView extends GetView<SETOfflineController> {
                                   fontWeight: FontWeight.w700,
                                   color: Color(0xFF191A26),
                                 ),
+                                controller: setOfflineController.searchController,
                                 // inputFormatters: [LengthLimitingTextInputFormatter(6)],
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
@@ -103,7 +105,7 @@ class SETOfflineView extends GetView<SETOfflineController> {
                             ),
                             child: MaterialButton(
                               onPressed: () {
-
+                                  setOfflineController.getsets(setOfflineController.searchController.text);
                               },
                               height: 38,
                               minWidth: 78,
